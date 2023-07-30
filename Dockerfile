@@ -11,14 +11,17 @@ WORKDIR $APP
 
 COPY . $APP
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update
+
+RUN apt-get install -y \
   rtl-sdr \
   librtlsdr-dev \
   libusb-1.0-0-dev \
   make \
   build-essential \
-  pkg-config \
-  && make \ 
+  pkg-config
+
+RUN make \ 
   && apt-get remove -y make build-essential pkg-config \
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*
